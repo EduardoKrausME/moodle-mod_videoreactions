@@ -7,10 +7,10 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true"/>
         <FIELD NAME="intro" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
-        <FIELD NAME="videosource" TYPE="char" LENGTH="100" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="videosource" TYPE="char" LENGTH="100" NOTNULL="true"/>
         <FIELD NAME="sourceconfig" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="videourl" TYPE="text" NOTNULL="false"/>
         <FIELD NAME="reactions" TYPE="text" NOTNULL="true"/>
@@ -27,9 +27,6 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="course" TYPE="foreign" FIELDS="course" REFTABLE="course" REFFIELDS="id"/>
       </KEYS>
-      <INDEXES>
-        <INDEX NAME="courseidx" UNIQUE="false" FIELDS="course"/>
-      </INDEXES>
     </TABLE>
     <TABLE NAME="videoreactions_reaction" COMMENT="Timestamped learner reactions">
       <FIELDS>
@@ -37,7 +34,7 @@
         <FIELD NAME="activityid" TYPE="int" LENGTH="10" NOTNULL="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
         <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
-        <FIELD NAME="reaction" TYPE="char" LENGTH="32" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="reaction" TYPE="char" LENGTH="32" NOTNULL="true"/>
         <FIELD NAME="videotime" TYPE="number" LENGTH="12" DECIMALS="3" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="timebucket" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
