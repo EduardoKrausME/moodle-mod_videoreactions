@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die;
 $functions = [
     'mod_videoreactions_track_watch' => [
         'classname' => 'mod_videoreactions\\external\\track_watch',
+        'methodname' => 'execute',
         'description' => 'Record a short-lived playback verification heartbeat.',
         'type' => 'write',
         'ajax' => true,
@@ -34,6 +35,7 @@ $functions = [
     ],
     'mod_videoreactions_save_reaction' => [
         'classname' => 'mod_videoreactions\\external\\save_reaction',
+        'methodname' => 'execute',
         'description' => 'Save a timestamped video reaction.',
         'type' => 'write',
         'ajax' => true,
@@ -41,6 +43,7 @@ $functions = [
     ],
     'mod_videoreactions_get_timeline' => [
         'classname' => 'mod_videoreactions\\external\\get_timeline',
+        'methodname' => 'execute',
         'description' => 'Return an aggregated reaction timeline.',
         'type' => 'read',
         'ajax' => true,
