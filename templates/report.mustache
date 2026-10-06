@@ -1,0 +1,113 @@
+{{!
+    @template mod_videoreactions/report
+
+    Aggregated teacher report.
+
+    Example context (json):
+    {
+        "name": "Video Reactions",
+        "total": 42,
+        "hastypes": true,
+        "types": [
+            {"reaction": "👏", "count": 21},
+            {"reaction": "❓", "count": 8}
+        ],
+        "hasdensity": true,
+        "density": [
+            {"time": 40, "timeformatted": "00:40", "count": 12, "height": 100, "url": "https://example.com/view.php?id=1&time=40"},
+            {"time": 70, "timeformatted": "01:10", "count": 6, "height": 50, "url": "https://example.com/view.php?id=1&time=70"}
+        ],
+        "hasmoments": true,
+        "moments": [
+            {"time": 40, "timeformatted": "00:40", "count": 12, "url": "https://example.com/view.php?id=1&time=40"}
+        ],
+        "hasusers": true,
+        "users": [
+            {"userid": 2, "fullname": "Student Example", "count": 9}
+        ]
+    }
+}}
+<div class="videoreactions-report">
+    <div class="videoreactions-report-summary">
+        <div class="videoreactions-stat">
+            <strong>{{total}}</strong>
+            <span>{{#str}} totalreactions, videoreactions {{/str}}</span>
+        </div>
+
+        {{#hastypes}}
+            <div class="videoreactions-type-list" aria-label="{{#str}} reactiondistribution, videoreactions {{/str}}">
+                {{#types}}
+                    <span class="videoreactions-type"><span aria-hidden="true">{{reaction}}</span> {{count}}</span>
+                {{/types}}
+            </div>
+        {{/hastypes}}
+    </div>
+
+    {{#hasdensity}}
+        <section class="videoreactions-report-section">
+            <h3>{{#str}} density, videoreactions {{/str}}</h3>
+            <div class="videoreactions-report-density">
+                {{#density}}
+                    <a href="{{{url}}}"
+                       class="videoreactions-density-column"
+                       style="height: {{height}}%"
+                       title="{{timeformatted}} — {{count}} {{#str}} count, videoreactions {{/str}}">
+                        <span class="sr-only">{{timeformatted}}: {{count}}</span>
+                    </a>
+                {{/density}}
+            </div>
+        </section>
+    {{/hasdensity}}
+
+    <div class="row">
+        <div class="col-lg-6">
+            <section class="videoreactions-report-section">
+                <h3>{{#str}} topmoments, videoreactions {{/str}}</h3>
+                {{#hasmoments}}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{#str}} moment, videoreactions {{/str}}</th>
+                                <th class="text-right">{{#str}} count, videoreactions {{/str}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#moments}}
+                                <tr>
+                                    <td><a href="{{{url}}}" title="{{#str}} openmoment, videoreactions {{/str}}">{{timeformatted}}</a></td>
+                                    <td class="text-right">{{count}}</td>
+                                </tr>
+                            {{/moments}}
+                        </tbody>
+                    </table>
+                {{/hasmoments}}
+                {{^hasmoments}}<p>{{#str}} noreactions, videoreactions {{/str}}</p>{{/hasmoments}}
+            </section>
+        </div>
+
+        <div class="col-lg-6">
+            <section class="videoreactions-report-section">
+                <h3>{{#str}} topstudents, videoreactions {{/str}}</h3>
+                {{#hasusers}}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{#str}} learner, videoreactions {{/str}}</th>
+                                <th class="text-right">{{#str}} count, videoreactions {{/str}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#users}}
+                                <tr>
+                                    <td>{{fullname}}</td>
+                                    <td class="text-right">{{count}}</td>
+                                </tr>
+                            {{/users}}
+                        </tbody>
+                    </table>
+                {{/hasusers}}
+                {{^hasusers}}<p>{{#str}} noreactions, videoreactions {{/str}}</p>{{/hasusers}}
+            </section>
+        </div>
+    </div>
+</div>

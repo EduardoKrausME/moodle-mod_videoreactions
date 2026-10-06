@@ -1,0 +1,83 @@
+{{!
+    @template mod_videoreactions/view
+
+    Video player, reaction controls and aggregated timeline.
+
+    Example context (json):
+    {
+        "name": "Video Reactions",
+        "hasintro": true,
+        "intro": "<p>React while you watch.</p>",
+        "player": {
+            "sourcehtml": "<video controls></video>"
+        },
+        "canreact": true,
+        "reactions": [
+            {"value": "👏", "label": "👏"},
+            {"value": "❓", "label": "❓"}
+        ],
+        "canviewclass": true,
+        "configjson": "{}",
+        "canviewreport": true,
+        "reporturl": "https://example.com/mod/videoreactions/report.php?id=1"
+    }
+}}
+<div class="videoreactions" data-region="videoreactions-root">
+    {{#hasintro}}
+        <div class="videoreactions-intro mb-4">{{{intro}}}</div>
+    {{/hasintro}}
+
+    <div id="videoreactions-player" class="videoreactions-player-card" aria-label="{{name}}">
+        <div class="videoreactions-player" data-region="player">
+            {{{player.sourcehtml}}}
+            <div class="videoreactions-animation" data-region="reaction-animation" aria-hidden="true"></div>
+        </div>
+
+        <div class="videoreactions-density"
+             data-region="density"
+             role="group"
+             aria-label="{{#str}} density, videoreactions {{/str}}"></div>
+        <div class="videoreactions-timeline"
+             data-region="timeline"
+             role="group"
+             aria-label="{{#str}} timeline, videoreactions {{/str}}"></div>
+    </div>
+
+    <div class="videoreactions-controls">
+        {{#canreact}}
+            <div class="videoreactions-buttons" role="group" aria-label="{{#str}} react, videoreactions {{/str}}">
+                {{#reactions}}
+                    <button type="button"
+                            class="btn btn-light videoreactions-reaction"
+                            data-action="react"
+                            data-reaction="{{value}}"
+                            title="{{label}}">
+                        <span aria-hidden="true">{{label}}</span>
+                        <span class="sr-only">{{#str}} react, videoreactions {{/str}} {{label}}</span>
+                    </button>
+                {{/reactions}}
+            </div>
+        {{/canreact}}
+
+        <div class="videoreactions-display">
+            <label for="videoreactions-display-mode" class="sr-only">{{#str}} timeline, videoreactions {{/str}}</label>
+            <select id="videoreactions-display-mode" class="custom-select" data-action="display-mode">
+                <option value="mine">{{#str}} myreactions, videoreactions {{/str}}</option>
+                {{#canviewclass}}
+                    <option value="class" selected>{{#str}} classreactions, videoreactions {{/str}}</option>
+                {{/canviewclass}}
+                <option value="hidden">{{#str}} hidereactions, videoreactions {{/str}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="videoreactions-status" data-region="status" aria-live="polite"></div>
+
+    {{#canviewreport}}
+        <div class="mt-3">
+            <a class="btn btn-secondary" href="{{{reporturl}}}">{{#str}} viewreport, videoreactions {{/str}}</a>
+        </div>
+    {{/canviewreport}}
+
+    <script type="application/json" data-region="config">{{{configjson}}}</script>
+</div>
