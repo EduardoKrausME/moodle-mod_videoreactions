@@ -4,6 +4,12 @@ Video Reactions is a Moodle activity where learners watch a video and register r
 
 The activity uses `local_video_bridge` for video sources and normalized playback adapters. Teachers choose which reactions are available, configure anti-spam limits, decide whether dense moments may trigger subtle playback animations, enable group behavior, and optionally configure completion and gradebook participation rules.
 
+## Requirements and installation
+
+**Required dependency:** [Moodle Video Bridge (`local_video_bridge`)](https://github.com/EduardoKrausME/moodle-local_video_bridge), version `2026100600` or later. The Video Bridge plugin is not bundled with this activity; install it in `local/video_bridge` before installing or upgrading `mod_videoreactions`.
+
+Video Bridge requires Moodle 4.5 or later and currently also depends on `local_ai_bridge`. Install its dependencies and complete the upgrade through **Site administration > Notifications**. An installation limited to plugins available on the Moodle Marketplace must ensure that these required plugins are available there; the activity cannot run without Video Bridge.
+
 ## Teacher flow
 
 Create a Video Reactions activity, choose any Video Bridge source that supports reliable tracking, select the available reactions, and configure cooldown and per-minute limits. The activity can use Moodle groups, a minimum reaction count for completion, and an optional participation grade based on a configurable target number of reactions.
